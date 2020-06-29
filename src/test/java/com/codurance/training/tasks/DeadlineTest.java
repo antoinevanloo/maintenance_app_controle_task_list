@@ -21,4 +21,13 @@ public class DeadlineTest {
         uneDeadline.setDate(datetime);
         assertEquals(LocalDateTime.of(2017, 1, 14, 10, 34),uneDeadline.getDate());
     }
+
+    @Test
+    public void check_date_is_today_test(){
+        Deadline uneDeadline = new Deadline(42);
+        LocalDateTime dateTime = LocalDateTime.now();
+        uneDeadline.setDate(dateTime);
+
+        assertEquals(true, uneDeadline.isDateToday());
+    }
 }
