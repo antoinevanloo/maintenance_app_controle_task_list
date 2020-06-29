@@ -31,13 +31,13 @@ public final class ApplicationTest {
         applicationThread = new Thread(taskList);
     }
 
-    @Before public void
-    start_the_application() {
+    @Before
+    public void start_the_application() {
         applicationThread.start();
     }
 
-    @After public void
-    kill_the_application() throws IOException, InterruptedException {
+    @After
+    public void kill_the_application() throws IOException, InterruptedException {
         if (!stillRunning()) {
             return;
         }
