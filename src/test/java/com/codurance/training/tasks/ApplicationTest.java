@@ -51,8 +51,8 @@ public final class ApplicationTest {
         throw new IllegalStateException("The application is still running.");
     }
 
-    @Test(timeout = 1000) public void
-    today_command_test() throws IOException {
+    @Test
+    public void today_command_test() throws IOException {
 
         execute("add/project/training");
         execute("add/task/training/Four Elements of Simple Design/29-06-2020");
@@ -60,7 +60,6 @@ public final class ApplicationTest {
         execute("add/task/training/Coupling and Cohesion/29-06-2018");
         execute("add/task/training/Primitive Obsession/29-06-2020");
         execute("add/task/training/Outside-In TDD");
-        execute("add/task/training/Interaction-Driven Design");
 
         execute("today");
         readLines(
@@ -74,8 +73,8 @@ public final class ApplicationTest {
         execute("quit");
     }
 
-    @Test(timeout = 1000) public void
-    it_works() throws IOException {
+    @Test(timeout = 1000)
+    public void it_works() throws IOException {
         execute("show");
 
         execute("add/project/secrets");
