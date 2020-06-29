@@ -1,5 +1,7 @@
 package com.codurance.training.tasks;
 
+import jdk.vm.ci.meta.Local;
+
 import java.time.LocalDateTime;
 
 public class Deadline {
@@ -21,5 +23,10 @@ public class Deadline {
 
     public void setDate(LocalDateTime date) {
         this.date = date;
+    }
+
+    public boolean isDateToday(){
+        LocalDateTime today = LocalDateTime.now();
+        return today.getDayOfMonth() == date.getDayOfMonth() && today.getMonth() == date.getMonth() && today.getYear() == date.getYear();
     }
 }
