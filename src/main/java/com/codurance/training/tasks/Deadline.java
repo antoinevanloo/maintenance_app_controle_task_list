@@ -12,6 +12,11 @@ public class Deadline {
         this.id = id;
     }
 
+    public Deadline(long id, LocalDateTime date){
+        this.id = id;
+        this.date = date;
+    }
+
     public long getId() {
         return id;
     }
