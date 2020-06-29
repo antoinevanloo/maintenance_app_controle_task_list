@@ -73,7 +73,7 @@ public final class ApplicationTest {
         execute("quit");
     }
 
-    @Test(timeout = 1000)
+    @Test
     public void it_works() throws IOException {
         execute("show");
 
@@ -97,10 +97,10 @@ public final class ApplicationTest {
         execute("add/task/training/Outside-In TDD");
         execute("add/task/training/Interaction-Driven Design");
 
-        execute("check 1");
-        execute("check 3");
-        execute("check 5");
-        execute("check 6");
+        execute("check/1");
+        execute("check/3");
+        execute("check/5");
+        execute("check/6");
 
         execute("show");
         readLines(
