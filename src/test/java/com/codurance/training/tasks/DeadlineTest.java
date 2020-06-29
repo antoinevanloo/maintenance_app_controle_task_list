@@ -16,9 +16,9 @@ public class DeadlineTest {
 
     @Test
     public void check_date_is_correct_test(){
-        Deadline uneDeadline = new Deadline(42);
         LocalDateTime datetime = LocalDateTime.of(2017, 1, 14, 10, 34);
-        uneDeadline.setDate(datetime);
+        Deadline uneDeadline = new Deadline(42,datetime);
+
         assertEquals(LocalDateTime.of(2017, 1, 14, 10, 34),uneDeadline.getDate());
     }
 
