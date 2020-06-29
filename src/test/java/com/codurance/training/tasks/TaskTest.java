@@ -22,12 +22,12 @@ public class TaskTest {
     @Test
     public void check_if_isDone_is_true(){
         Task uneTask = new Task(1,"Comment est votre blanquette ?", true);
-        assertEquals(true,uneTask.isDone());
+        assertTrue(uneTask.isDone());
     }
 
     @Test
     public void check_if_isDone_is_false(){
         Task uneTask = new Task(1,"J’aime me beurrer la biscotte", false);
-        assertEquals(false,uneTask.isDone());
+        assertFalse(uneTask.isDone());
     }
 }

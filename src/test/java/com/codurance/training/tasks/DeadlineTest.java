@@ -3,8 +3,6 @@ package com.codurance.training.tasks;
 import org.junit.Test;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
