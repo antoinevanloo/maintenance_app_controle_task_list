@@ -43,7 +43,7 @@ public final class TaskList implements Runnable {
     }
 
     private void execute(String commandLine) {
-        String[] commandRest = commandLine.split(" ", 2);
+        String[] commandRest = commandLine.split("/", 3);
         String command = commandRest[0];
         switch (command) {
             case "show":
@@ -57,6 +57,9 @@ public final class TaskList implements Runnable {
                 break;
             case "uncheck":
                 uncheck(commandRest[1]);
+                break;
+            case "today":
+                today();
                 break;
             case "help":
                 help();
@@ -77,13 +80,25 @@ public final class TaskList implements Runnable {
         }
     }
 
+    private void today() {
+        for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
+            out.println(project.getKey());
+            for (Task task : project.getValue()) {
+                if (task.getDeadline() != null && task.getDeadline().isDateToday()) {
+                    out.printf("    %s%n", task.getDescription());
+                }
+            }
+            out.println();
+        }
+    }
+
     private void add(String commandLine) {
-        String[] subcommandRest = commandLine.split(" ", 2);
+        String[] subcommandRest = commandLine.split("/", 3);
         String subcommand = subcommandRest[0];
         if (subcommand.equals("project")) {
             addProject(subcommandRest[1]);
         } else if (subcommand.equals("task")) {
-            String[] projectTask = subcommandRest[1].split(" ", 3);
+            String[] projectTask = subcommandRest[1].split("/", 3);
             addTask(projectTask[0], projectTask[1], projectTask[2]);
         }
     }
@@ -104,7 +119,7 @@ public final class TaskList implements Runnable {
 
         if(deadlineString != null){
             Deadline deadline = new Deadline(nextId());
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             LocalDateTime dateDeadline = LocalDateTime.parse(deadlineString, formatter);
             deadline.setDate(dateDeadline);
             task.setDeadline(deadline);
