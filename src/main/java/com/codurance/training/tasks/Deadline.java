@@ -1,17 +1,18 @@
 package com.codurance.training.tasks;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Deadline {
 
     private final long id;
-    private LocalDateTime date;
+    private LocalDate date;
 
     public Deadline(long id){
         this.id = id;
     }
 
-    public Deadline(long id, LocalDateTime date){
+    public Deadline(long id, LocalDate date){
         this.id = id;
         this.date = date;
     }
@@ -20,16 +21,16 @@ public class Deadline {
         return id;
     }
 
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
     public boolean isDateToday(){
-        LocalDateTime today = LocalDateTime.now();
+        LocalDate today = LocalDate.now();
         return today.getDayOfMonth() == date.getDayOfMonth() && today.getMonth() == date.getMonth() && today.getYear() == date.getYear();
     }
 }

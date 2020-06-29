@@ -2,8 +2,8 @@ package com.codurance.training.tasks;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -93,7 +93,7 @@ public final class TaskList implements Runnable {
     }
 
     private void add(String commandLine) {
-        String[] subcommandRest = commandLine.split("/", 3);
+        String[] subcommandRest = commandLine.split("/", 2);
         String subcommand = subcommandRest[0];
         if (subcommand.equals("project")) {
             addProject(subcommandRest[1]);
@@ -120,7 +120,7 @@ public final class TaskList implements Runnable {
         if(deadlineString != null){
             Deadline deadline = new Deadline(nextId());
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-            LocalDateTime dateDeadline = LocalDateTime.parse(deadlineString, formatter);
+            LocalDate dateDeadline = LocalDate.parse(deadlineString, formatter);
             deadline.setDate(dateDeadline);
             task.setDeadline(deadline);
         }
