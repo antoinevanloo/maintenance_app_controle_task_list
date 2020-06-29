@@ -52,6 +52,29 @@ public final class ApplicationTest {
     }
 
     @Test(timeout = 1000) public void
+    today_command_test() throws IOException {
+
+        execute("add project training");
+        execute("add task training Four Elements of Simple Design 29-06-2020 12:00");
+        execute("add task training SOLID 30-06-2020 12:00");
+        execute("add task training Coupling and Cohesion 29-06-2018 12:00");
+        execute("add task training Primitive Obsession 29-06-2020 11:00");
+        execute("add task training Outside-In TDD");
+        execute("add task training Interaction-Driven Design");
+
+        execute("today");
+        readLines(
+
+                "training",
+                "    Four Elements of Simple Design",
+                "    Primitive Obsession",
+                ""
+        );
+
+        execute("quit");
+    }
+
+    @Test(timeout = 1000) public void
     it_works() throws IOException {
         execute("show");
 
