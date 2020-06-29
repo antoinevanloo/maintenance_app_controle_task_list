@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -87,8 +89,8 @@ public final class TaskList implements Runnable {
         if (subcommand.equals("project")) {
             addProject(subcommandRest[1]);
         } else if (subcommand.equals("task")) {
-            String[] projectTask = subcommandRest[1].split(" ", 2);
-            addTask(projectTask[0], projectTask[1]);
+            String[] projectTask = subcommandRest[1].split(" ", 3);
+            addTask(projectTask[0], projectTask[1], projectTask[2]);
         }
     }
 
@@ -96,14 +98,23 @@ public final class TaskList implements Runnable {
         tasks.put(name, new ArrayList<Task>());
     }
 
-    private void addTask(String project, String description) {
+    private void addTask(String project, String description, String deadlineString) {
         List<Task> projectTasks = tasks.get(project);
         if (projectTasks == null) {
             out.printf("Could not find a project with the name \"%s\".", project);
             out.println();
             return;
         }
-        projectTasks.add(new Task(nextId(), description, false));
+        Task task = new Task(nextId(), description, false);
+        projectTasks.add(task);
+
+        if(deadlineString != null){
+            Deadline deadline = new Deadline(nextId());
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+            LocalDateTime dateDeadline = LocalDateTime.parse(deadlineString, formatter);
+            deadline.setDate(dateDeadline);
+            task.setDeadline(deadline);
+        }
     }
 
     private void check(String idString) {
