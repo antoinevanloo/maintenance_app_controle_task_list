@@ -4,12 +4,21 @@ package com.codurance.training.tasks;
         import java.util.List;
 
 public final class Project {
-    private final String id;
+    private String id;
     private List<Task> tasks;
 
-    public Project(String id) {
+    public Project(String id, ArrayList<Task> tasks) {
         this.id = id;
-        this.tasks = new ArrayList<>();
+        this.tasks = tasks;
+    }
+
+    public Project(String id) {
+
+        this.id = id;
+    }
+
+    public Project() {
+
     }
 
     public String getId() {

@@ -14,7 +14,7 @@ import java.util.Map;
 public final class TaskList implements Runnable {
     private static final String QUIT = "quit";
 
-    private final Map<String, List<Task>> tasks = new LinkedHashMap<>();
+    private final List<Project> projects = new ArrayList<>();
     private final BufferedReader in;
     private final PrintWriter out;
 
@@ -96,23 +96,29 @@ public final class TaskList implements Runnable {
         String[] subcommandRest = commandLine.split("/", 2);
         String subcommand = subcommandRest[0];
         if (subcommand.equals("project")) {
-            addProject(subcommandRest[1]);
+            Project project = new Project(subcommand, new ArrayList<Task>());
         } else if (subcommand.equals("task")) {
             String[] projectTask = subcommandRest[1].split("/", 3);
+            Project projectToAdd = new Project();
+            for(Project project : projects){
+                if (project.getId().equals(projectTask[0])){
+                    projectToAdd = project;
+                }
+            }
             if(projectTask.length > 2){
-                addTask(projectTask[0], projectTask[1], projectTask[2]);
+                addTask(projectToAdd, projectTask[1], projectTask[2]);
             } else {
-                addTask(projectTask[0], projectTask[1], null);
+                addTask(projectToAdd, projectTask[1], null);
             }
         }
     }
 
-    private void addProject(String name) {
-        tasks.put(name, new ArrayList<Task>());
+    private void addProject(Project projet) {
+        projects.add(projet);
     }
 
-    private void addTask(String project, String description, String deadlineString) {
-        List<Task> projectTasks = tasks.get(project);
+    private void addTask(Project project, String description, String deadlineString) {
+        List<Task> projectTasks = project.getTasks();
         if (projectTasks == null) {
             out.printf("Could not find a project with the name \"%s\".", project);
             out.println();
